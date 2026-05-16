@@ -1,1 +1,1135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مكتب الأستاذ محمود مختار للمحاسبة والاستشارات المالية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dark: #9a7a2e;
+      --navy: #0d1b2a;
+      --navy-mid: #162235;
+      --navy-light: #1e3048;
+      --white: #f8f5ee;
+      --gray: #a89f8c;
+      --accent: #d4af6e;
+    }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ====== NOISE TEXTURE OVERLAY ====== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ====== NAVBAR ====== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(13, 27, 42, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+      animation: slideDown 0.8s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .nav-logo {
+      font-family: 'Cairo', sans-serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; right: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--navy) !important;
+      padding: 0.5rem 1.5rem;
+      border-radius: 2px;
+      font-weight: 700 !important;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+    }
+
+    .nav-cta::after { display: none !important; }
+
+    /* ====== HERO ====== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 4rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+        linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 50%, #0a1520 100%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.3s both;
+    }
+
+    .hero-eyebrow-line {
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-eyebrow span {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.8s 0.5s both;
+    }
+
+    .hero-title .name {
+      display: block;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray);
+      margin: 1.5rem 0 2.5rem;
+      line-height: 1.8;
+      max-width: 520px;
+      animation: fadeUp 0.8s 0.7s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.9s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--navy);
+      padding: 0.9rem 2.5rem;
+      border: none;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(201,168,76,0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--gold);
+      padding: 0.9rem 2.5rem;
+      border: 1px solid rgba(201,168,76,0.4);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: var(--gold);
+    }
+
+    /* Floating decorative element */
+    .hero-deco {
+      position: absolute;
+      left: 55%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      animation: fadeUp 1s 0.4s both;
+    }
+
+    .deco-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.15);
+      animation: spin 20s linear infinite;
+    }
+
+    .deco-ring:nth-child(1) { inset: 0; }
+    .deco-ring:nth-child(2) { inset: 40px; animation-duration: 30s; animation-direction: reverse; border-style: dashed; }
+    .deco-ring:nth-child(3) { inset: 100px; animation-duration: 15s; border-color: rgba(201,168,76,0.08); }
+
+    .deco-center {
+      position: absolute;
+      inset: 160px;
+      background: rgba(201,168,76,0.03);
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .deco-icon {
+      font-size: 4rem;
+      opacity: 0.4;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ====== STATS BAR ====== */
+    .stats-bar {
+      background: var(--navy-light);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 2.5rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      position: relative;
+      animation: fadeUp 0.6s both;
+    }
+
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%;
+      height: 60%;
+      width: 1px;
+      background: rgba(201,168,76,0.2);
+    }
+
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      color: var(--gray);
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ====== SECTIONS COMMON ====== */
+    section { padding: 6rem 4rem; }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.25);
+      padding: 0.35rem 1rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .section-desc {
+      color: var(--gray);
+      font-size: 1rem;
+      line-height: 1.9;
+      max-width: 550px;
+    }
+
+    /* ====== SERVICES ====== */
+    .services { background: var(--navy-mid); }
+
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--navy);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+      cursor: default;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(to left, var(--gold), transparent);
+      transition: width 0.4s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(201,168,76,0.3);
+    }
+
+    .service-card:hover::before { width: 100%; }
+
+    .service-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .service-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.7rem;
+    }
+
+    .service-desc {
+      color: var(--gray);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .service-number {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 0.7rem;
+      color: rgba(201,168,76,0.3);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    /* ====== ABOUT ====== */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-card {
+      background: var(--navy-light);
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 3rem;
+      position: relative;
+    }
+
+    .about-card::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: -12px;
+      right: 12px;
+      top: 12px;
+      border: 1px solid rgba(201,168,76,0.1);
+      z-index: -1;
+    }
+
+    .about-avatar {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--navy);
+      font-weight: 900;
+    }
+
+    .about-name {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .about-role {
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-bio {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.9;
+    }
+
+    .badges {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .badge {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      color: var(--gold);
+      font-size: 0.75rem;
+      padding: 0.3rem 0.8rem;
+      font-weight: 600;
+    }
+
+    .about-text .section-desc { max-width: 100%; }
+
+    .about-features {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .about-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .feature-dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 0.55rem;
+      flex-shrink: 0;
+    }
+
+    .feature-text {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* ====== WHY US ====== */
+    .why { background: var(--navy-mid); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .why-item {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(201,168,76,0.08);
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .why-item:hover {
+      background: rgba(201,168,76,0.04);
+      border-color: rgba(201,168,76,0.25);
+    }
+
+    .why-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .why-title { font-weight: 700; margin-bottom: 0.5rem; font-size: 1rem; }
+    .why-desc { color: var(--gray); font-size: 0.88rem; line-height: 1.7; }
+
+    /* ====== CONTACT ====== */
+    .contact-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info { }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .contact-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-value {
+      font-size: 1rem;
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .contact-form {
+      background: var(--navy-light);
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 2.5rem;
+    }
+
+    .form-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--white);
+      padding: 0.75rem 1rem;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { min-height: 120px; resize: vertical; }
+
+    .form-group select option { background: var(--navy-mid); }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--navy);
+      border: none;
+      padding: 1rem;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: opacity 0.3s, transform 0.2s;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: #070e16;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      padding: 3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+
+    .footer-logo span {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--gray);
+      font-weight: 400;
+      margin-top: 0.2rem;
+    }
+
+    .footer-copy {
+      color: var(--gray);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(201,168,76,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: rgba(201,168,76,0.1);
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ====== GOLD DIVIDER ====== */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0;
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section, .hero { padding: 4rem 1.5rem; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 2rem 1.5rem; }
+      .services-header, .about, .contact-section { grid-template-columns: 1fr; gap: 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-deco { display: none; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .stat-item::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-logo">
+      م. محمود مختار
+      <span>للمحاسبة والاستشارات المالية</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#services">خدماتنا</a></li>
+      <li><a href="#about">عن المكتب</a></li>
+      <li><a href="#why">لماذا نحن</a></li>
+      <li><a href="#contact" class="nav-cta">تواصل معنا</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span>مكتب محاسبة معتمد منذ ١٩٩٨</span>
+      </div>
+      <h1 class="hero-title">
+        ثقتك هي
+        <em class="name">أستاذ محمود مختار</em>
+        رأس مالنا
+      </h1>
+      <p class="hero-subtitle">
+        مكتب متخصص في المحاسبة والاستشارات المالية والضريبية، نقدم حلولاً مالية متكاملة للشركات والأفراد بكل احترافية وأمانة.
+      </p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">احجز استشارة مجانية</a>
+        <a href="#services" class="btn-secondary">اعرف خدماتنا</a>
+      </div>
+    </div>
+
+    <div class="hero-deco">
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
+      <div class="deco-ring"></div>
+      <div class="deco-center">
+        <span class="deco-icon">⚖️</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item reveal">
+      <span class="stat-number">+٢٥</span>
+      <div class="stat-label">سنة من الخبرة</div>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-number">+٥٠٠</span>
+      <div class="stat-label">عميل راضٍ</div>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-number">+٢٠٠</span>
+      <div class="stat-label">شركة يخدمها المكتب</div>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-number">١٠٠٪</span>
+      <div class="stat-label">دقة في الامتثال الضريبي</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-header reveal">
+      <div>
+        <div class="section-tag">✦ خدماتنا</div>
+        <h2 class="section-title">كل ما تحتاجه<br><em>في مكان واحد</em></h2>
+      </div>
+      <p class="section-desc">
+        نقدم مجموعة شاملة من الخدمات المحاسبية والمالية المصممة خصيصاً لتلبية احتياجات أعمالك وتحقيق أهدافك المالية.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-number">٠١</span>
+        <span class="service-icon">📊</span>
+        <div class="service-title">المحاسبة المالية</div>
+        <p class="service-desc">إعداد القوائم المالية والتقارير المحاسبية وفق المعايير الدولية بدقة واحترافية تامة.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">٠٢</span>
+        <span class="service-icon">🏛️</span>
+        <div class="service-title">الاستشارات الضريبية</div>
+        <p class="service-desc">تقديم حلول ضريبية متكاملة، إعداد الإقرارات الضريبية، والتخطيط لتحسين الالتزام الضريبي.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">٠٣</span>
+        <span class="service-icon">🔍</span>
+        <div class="service-title">المراجعة والتدقيق</div>
+        <p class="service-desc">خدمات التدقيق الداخلي والخارجي لضمان سلامة البيانات المالية وكشف أي مخالفات.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">٠٤</span>
+        <span class="service-icon">💼</span>
+        <div class="service-title">تأسيس الشركات</div>
+        <p class="service-desc">متابعة جميع إجراءات تأسيس الشركات والحصول على التراخيص اللازمة من الجهات المختصة.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">٠٥</span>
+        <span class="service-icon">📈</span>
+        <div class="service-title">الاستشارات المالية</div>
+        <p class="service-desc">تحليل مالي شامل ووضع خطط استثمارية وتمويلية تساعدك على تحقيق النمو المستدام.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">٠٦</span>
+        <span class="service-icon">📋</span>
+        <div class="service-title">كشف الرواتب</div>
+        <p class="service-desc">إعداد وإدارة رواتب الموظفين والتأمينات الاجتماعية وكل ما يتعلق بالموارد البشرية.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about">
+      <div class="about-visual reveal">
+        <div class="about-card">
+          <div class="about-avatar">م.م</div>
+          <div class="about-name">أ. محمود مختار</div>
+          <div class="about-role">محاسب قانوني معتمد · خبير ضرائب</div>
+          <p class="about-bio">
+            خبرة تمتد لأكثر من ٢٥ عاماً في مجال المحاسبة والاستشارات المالية والضريبية، مع إلمام كامل بالقانون المصري والمعايير المحاسبية الدولية.
+          </p>
+          <div class="badges">
+            <span class="badge">محاسب قانوني</span>
+            <span class="badge">خبير ضريبي</span>
+            <span class="badge">مستشار مالي</span>
+            <span class="badge">عضو ICPA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-text reveal">
+        <div class="section-tag">✦ من نحن</div>
+        <h2 class="section-title">مكتب يبني <em>الثقة</em><br>بالأرقام الصحيحة</h2>
+        <p class="section-desc">
+          مكتب الأستاذ محمود مختار للمحاسبة والاستشارات المالية هو شريكك المثالي لتحقيق النجاح المالي. نؤمن بأن الشفافية والدقة هما أساس كل علاقة مهنية ناجحة.
+        </p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="feature-dot"></div>
+            <p class="feature-text">فريق من المحاسبين القانونيين المؤهلين والمتخصصين في جميع القطاعات.</p>
+          </div>
+          <div class="about-feature">
+            <div class="feature-dot"></div>
+            <p class="feature-text">متابعة مستمرة لآخر التعديلات الضريبية والتشريعات المالية في مصر.</p>
+          </div>
+          <div class="about-feature">
+            <div class="feature-dot"></div>
+            <p class="feature-text">استخدام أحدث برامج المحاسبة والتكنولوجيا المالية لضمان الدقة والسرعة.</p>
+          </div>
+          <div class="about-feature">
+            <div class="feature-dot"></div>
+            <p class="feature-text">سرية تامة لجميع البيانات والمعلومات المالية للعملاء.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHY US -->
+  <section class="why" id="why">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto 1rem;" class="reveal">
+      <div class="section-tag">✦ لماذا نحن</div>
+      <h2 class="section-title">ما يميزنا عن <em>الآخرين</em></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <div class="why-icon">🎯</div>
+        <div class="why-title">دقة لا تُضاهى</div>
+        <p class="why-desc">نضمن أعلى مستوى من الدقة في جميع التقارير المالية والإقرارات الضريبية.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">سرعة في الإنجاز</div>
+        <p class="why-desc">نلتزم بالمواعيد المحددة دون تأخير، لأننا نعرف أن وقتك ثمين.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-icon">🔐</div>
+        <div class="why-title">سرية وأمانة تامة</div>
+        <p class="why-desc">بياناتك المالية في أمان تام، نلتزم بالسرية المهنية الكاملة مع جميع عملائنا.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-icon">🤝</div>
+        <div class="why-title">خدمة شخصية</div>
+        <p class="why-desc">نتعامل مع كل عميل كشريك، ونقدم حلولاً مخصصة تناسب طبيعة عمله تماماً.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-section">
+      <div class="reveal">
+        <div class="section-tag">✦ تواصل معنا</div>
+        <h2 class="section-title">نحن هنا<br><em>لمساعدتك</em></h2>
+        <p class="section-desc" style="margin-bottom: 2.5rem;">
+          تواصل معنا الآن للحصول على استشارة مجانية. فريقنا جاهز للرد على جميع استفساراتك المالية والضريبية.
+        </p>
+
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">العنوان</div>
+            <div class="contact-value">القاهرة، مصر</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">الهاتف</div>
+            <div class="contact-value" dir="ltr">+20 10 XXXX XXXX</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">البريد الإلكتروني</div>
+            <div class="contact-value">info@mokhtar-accounting.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">ساعات العمل</div>
+            <div class="contact-value">السبت – الخميس: ٩ص – ٥م</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form reveal">
+        <div class="form-title">أرسل رسالتك</div>
+        <div class="form-group">
+          <label>الاسم الكامل</label>
+          <input type="text" placeholder="ادخل اسمك" />
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف</label>
+          <input type="tel" placeholder="01X XXXX XXXX" dir="ltr" />
+        </div>
+        <div class="form-group">
+          <label>نوع الخدمة</label>
+          <select>
+            <option>اختر الخدمة المطلوبة</option>
+            <option>المحاسبة المالية</option>
+            <option>الاستشارات الضريبية</option>
+            <option>المراجعة والتدقيق</option>
+            <option>تأسيس الشركات</option>
+            <option>الاستشارات المالية</option>
+            <option>خدمة أخرى</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>رسالتك</label>
+          <textarea placeholder="اكتب تفاصيل طلبك هنا..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="handleSubmit(this)">إرسال الطلب ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      مكتب م. محمود مختار
+      <span>للمحاسبة والاستشارات المالية</span>
+    </div>
+    <div class="footer-copy">
+      © ٢٠٢٥ جميع الحقوق محفوظة · مكتب الأستاذ محمود مختار
+    </div>
+    <div class="footer-social">
+      <a href="#" class="social-link" title="فيسبوك">f</a>
+      <a href="#" class="social-link" title="واتساب">w</a>
+      <a href="#" class="social-link" title="لينكدإن">in</a>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // Stats counter animation
+    function animateCounter(el) {
+      const target = el.textContent;
+      const isPercent = target.includes('٪');
+      const hasPlus = target.includes('+');
+      const numArabic = target.replace(/[+٪]/g, '').replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+      const num = parseInt(numArabic);
+      if (isNaN(num)) return;
+      let current = 0;
+      const duration = 1500;
+      const step = num / (duration / 16);
+      const timer = setInterval(() => {
+        current = Math.min(current + step, num);
+        const arabicNum = Math.floor(current).toString().replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        el.textContent = (hasPlus ? '+' : '') + arabicNum + (isPercent ? '٪' : '');
+        if (current >= num) clearInterval(timer);
+      }, 16);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.stat-number').forEach(animateCounter);
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    });
+    document.querySelector('.stats-bar') && statsObserver.observe(document.querySelector('.stats-bar'));
+
+    // Form submit
+    function handleSubmit(btn) {
+      btn.textContent = '✓ تم الإرسال بنجاح!';
+      btn.style.background = 'linear-gradient(135deg, #2d6a2d, #3a8a3a)';
+      btn.style.color = '#fff';
+      setTimeout(() => {
+        btn.textContent = 'إرسال الطلب ←';
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
